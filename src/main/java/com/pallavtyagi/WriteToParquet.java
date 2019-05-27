@@ -18,7 +18,39 @@ import java.util.List;
 
 public class WriteToParquet {
 
-        public static void main(String[] s) {
+    /**
+     *
+     {
+     "eventId": "",
+     "system": "",
+     "dateStart": "",
+     "dateEnd": "",
+     "totalIds": "",
+     "totalMissing":"",
+     "missingEvents": [
+     {
+     "id":"",
+     "type":"",
+     "version":""
+     "receivedAt":""
+     },
+     {
+     "id":"",
+     "type":"",
+     "version":""
+     "receivedAt":""
+     }
+
+     ]
+
+     }
+     *
+     *
+     *
+     */
+
+
+    public static void main(String[] s) {
             // First thing - parse the schema as it will be used
             Schema schema = parseSchema();
             List<GenericData.Record> recordList = getRecords(schema);
@@ -30,7 +62,7 @@ public class WriteToParquet {
             Schema schema = null;
             try {
                 // pass path to schema
-                File file = new File("/home/pallav/Documents/workspace/code/spark-s3/data/EmpSchema.avsc");
+                File file = new File("data/EventSummary.avsc");
                 InputStream is = new FileInputStream(file);
                 schema = parser.parse(is);
 
@@ -45,24 +77,22 @@ public class WriteToParquet {
             List<GenericData.Record> recordList = new ArrayList<GenericData.Record>();
             GenericData.Record record = new GenericData.Record(schema);
             // Adding 2 records
-            record.put("id", 1);
-            record.put("Name", "emp1");
-            record.put("Dept", "D1");
-            recordList.add(record);
+            record.put("eventId", "1");
+            record.put("system", "system1");
+            record.put("dateStart", "2019-01-01");
+            record.put("dateEnd", "2019-01-02");
+            record.put("totalIds", "102");
+            record.put("totalMissing", "2");
 
-            record = new GenericData.Record(schema);
-            record.put("id", 2);
-            record.put("Name", "emp2");
-            record.put("Dept", "D2");
             recordList.add(record);
-
             return recordList;
         }
 
+        // {"id": "1", "type": "test", "version":"1", "receivedAt": "2019-01-01"}
 
         private static void writeToParquet(List<GenericData.Record> recordList, Schema schema) {
             // Path to Parquet file in HDFS
-            Path path = new Path("/home/pallav/Documents/workspace/code/spark-s3/data/EmpRecord.parquet");
+            Path path = new Path("/home/pallav/Documents/workspace/code/spark-s3/data/EventSummary3.parquet");
             ParquetWriter<GenericData.Record> writer = null;
             // Creating ParquetWriter using builder
             try {

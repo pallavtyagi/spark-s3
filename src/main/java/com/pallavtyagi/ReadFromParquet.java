@@ -16,7 +16,7 @@ public class ReadFromParquet {
 
     private static void readParquetFile() {
         ParquetReader<GenericData.Record> reader = null;
-        Path path =    new    Path("/home/pallav/Documents/workspace/code/spark-s3/data/EmpRecord.parquet");
+        Path path =    new    Path("/home/pallav/Documents/workspace/code/spark-s3/data/EventSummary3.parquet");
         try {
             reader = AvroParquetReader
                     .<GenericData.Record>builder(path)

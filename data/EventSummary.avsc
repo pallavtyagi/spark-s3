@@ -1,0 +1,24 @@
+{
+  "type" : "record",
+  "name" : "MyClass",
+  "namespace" : "com.test.avro",
+  "fields" : [ {
+    "name" : "eventId",
+    "type" : "string"
+  }, {
+    "name" : "system",
+    "type" : "string"
+  }, {
+    "name" : "dateStart",
+    "type" : "string"
+  }, {
+    "name" : "dateEnd",
+    "type" : "string"
+  }, {
+    "name" : "totalIds",
+    "type" : "string"
+  }, {
+    "name" : "totalMissing",
+    "type" : "string"
+  }]
+}
